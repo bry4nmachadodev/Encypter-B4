@@ -53,30 +53,63 @@ public class Menu {
     }
 
     private void criptografar() throws Exception {
-        System.out.print("\nDigite o caminho completo do arquivo: ");
-        String caminho = scanner.nextLine();
-        Path arquivo = Paths.get(caminho);
+        Path arquivo = null;
 
-        System.out.println("\n⏳ Gerando/carregando chave...");
+        // Loop até conseguir um caminho válido
+        while (arquivo == null) {
+            System.out.print("\nDigite o caminho completo do arquivo: ");
+            String caminho = scanner.nextLine();
+
+            try {
+                arquivo = Paths.get(caminho);
+
+                // Verifica se o arquivo existe
+                if (!java.nio.file.Files.exists(arquivo)) {
+                    System.out.println("Arquivo não encontrado! Tente novamente.");
+                    arquivo = null; // Reseta pra continuar o loop
+                }
+            } catch (Exception e) {
+                System.out.println("Caminho inválido! Tente novamente.");
+                arquivo = null;
+            }
+        }
+
+        System.out.println("\nGerando/carregando chave...");
         SecretKey chave = km.generateKey();
         km.salvarKey(chave);
 
-        System.out.println("⏳ Criptografando arquivo...");
+        System.out.println("Criptografando arquivo...");
         fe.criptografarArquivo(chave, arquivo);
-        System.out.println("✅ Arquivo criptografado com sucesso!");
-        System.out.println("📁 Chave salva em: C:\\Key-Encrypter\\chave_secreta.key");
+        System.out.println("Arquivo criptografado com sucesso!");
+        System.out.println("Chave salva em: C:\\Key-Encrypter\\chave_secreta.key");
     }
 
     private void descriptografar() throws Exception {
-        System.out.print("\nDigite o caminho completo do arquivo: ");
-        String caminho = scanner.nextLine();
-        Path arquivo = Paths.get(caminho);
+        Path arquivo = null;
 
-        System.out.println("\n⏳ Carregando chave...");
+        // Loop até conseguir um caminho válido
+        while (arquivo == null) {
+            System.out.print("\nDigite o caminho completo do arquivo: ");
+            String caminho = scanner.nextLine();
+
+            try {
+                arquivo = Paths.get(caminho);
+
+                if (!java.nio.file.Files.exists(arquivo)) {
+                    System.out.println("Arquivo não encontrado! Tente novamente.");
+                    arquivo = null;
+                }
+            } catch (Exception e) {
+                System.out.println("Caminho inválido! Tente novamente.");
+                arquivo = null;
+            }
+        }
+
+        System.out.println("\nCarregando chave...");
         SecretKey chave = km.carregarKey();
 
-        System.out.println("⏳ Descriptografando arquivo...");
+        System.out.println("Descriptografando arquivo...");
         fe.descriptografarArquivo(chave, arquivo);
-        System.out.println("✅ Arquivo descriptografado com sucesso!");
+        System.out.println("Arquivo descriptografado com sucesso!");
     }
 }
