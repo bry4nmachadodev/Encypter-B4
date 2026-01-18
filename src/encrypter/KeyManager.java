@@ -37,8 +37,17 @@ public class KeyManager {
     }
 
     //ler arquivo -> que está com a chave
-    public SecretKey carregarKey() throws IOException {
+    public SecretKey carregarKey() throws Exception {
         Path path = Paths.get("C:\\Key-Encrypter\\chave_secreta.key");
+
+        if (!Files.exists(path)) {
+            System.out.println("Chave não encontrada. Gerando nova chave...");
+            SecretKey novaChave = generateKey();
+            salvarKey(novaChave);
+            return novaChave;
+        }
+
+        System.out.println("Carregando chave existente...");
         return new SecretKeySpec(Files.readAllBytes(path), "AES");
     }
 
