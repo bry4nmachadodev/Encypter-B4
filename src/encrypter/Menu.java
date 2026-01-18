@@ -55,7 +55,6 @@ public class Menu {
     private void criptografar() throws Exception {
         Path arquivo = null;
 
-        // Loop até conseguir um caminho válido
         while (arquivo == null) {
             System.out.print("\nDigite o caminho completo do arquivo: ");
             String caminho = scanner.nextLine();
@@ -63,22 +62,17 @@ public class Menu {
             try {
                 arquivo = Paths.get(caminho);
 
-                // Verifica se o arquivo existe
+
                 if (!java.nio.file.Files.exists(arquivo)) {
                     System.out.println("Arquivo não encontrado! Tente novamente.");
-                    arquivo = null; // Reseta pra continuar o loop
+                    arquivo = null;
                 }
             } catch (Exception e) {
                 System.out.println("Caminho inválido! Tente novamente.");
                 arquivo = null;
             }
         }
-
-        System.out.println("\nGerando chave...");
-        SecretKey chave = km.generateKey();
-        km.salvarKey(chave);
-
-        System.out.println("Criptografando arquivo...");
+        SecretKey chave = km.carregarKey();
         fe.criptografarArquivo(chave, arquivo);
         System.out.println("Arquivo criptografado com sucesso!");
     }
@@ -103,11 +97,7 @@ public class Menu {
                 arquivo = null;
             }
         }
-
-        System.out.println("\nCarregando chave...");
         SecretKey chave = km.carregarKey();
-
-        System.out.println("Descriptografando arquivo...");
         fe.descriptografarArquivo(chave, arquivo);
         System.out.println("Arquivo descriptografado com sucesso!");
     }
