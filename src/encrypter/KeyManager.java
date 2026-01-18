@@ -2,6 +2,10 @@ package encrypter;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.NoSuchAlgorithmException;
 
 public class KeyManager {
@@ -14,4 +18,15 @@ public class KeyManager {
 
         return chaveGerada;
     }
+
+    //criar arquivo -> com a chave AES para descriptografar
+    public void salvarKey(SecretKey key) throws IOException {
+        byte[] keyBytes = key.getEncoded();
+        Path path = Paths.get("C:\\Key-Encrypter\\chave_secreta.key");
+        Files.createDirectories(path.getParent());
+        Files.write(path, keyBytes);
+
+        System.out.println("Chave salva em: " + path.toAbsolutePath());
+    }
+
 }
