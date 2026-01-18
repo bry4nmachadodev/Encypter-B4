@@ -19,4 +19,15 @@ public class FileEncryptor {
         Files.write(arquivoOrigem, dadosCriptografado);
     }
 
+    //Descriptografar arquivo -> chave AES
+    public void descriptografarArquivo(SecretKey chave, Path arquivoOrigem) throws Exception {
+        //lê o arquivo recebido
+        byte[] dados = Files.readAllBytes(arquivoOrigem);
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, chave);
+        byte[] dadosCriptografado = cipher.doFinal(dados);
+
+        Files.write(arquivoOrigem, dadosCriptografado);
+    }
+
 }
