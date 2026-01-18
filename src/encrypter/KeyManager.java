@@ -22,8 +22,14 @@ public class KeyManager {
 
     //criar arquivo -> com a chave AES para descriptografar
     public void salvarKey(SecretKey key) throws IOException {
-        byte[] keyBytes = key.getEncoded();
         Path path = Paths.get("C:\\Key-Encrypter\\chave_secreta.key");
+
+        if (Files.exists(path)) {
+            System.out.println("Chave já existe em: " + path.toAbsolutePath());
+            return;
+        }
+
+        byte[] keyBytes = key.getEncoded();
         Files.createDirectories(path.getParent());
         Files.write(path, keyBytes);
 
