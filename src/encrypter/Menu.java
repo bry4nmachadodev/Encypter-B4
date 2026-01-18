@@ -74,14 +74,13 @@ public class Menu {
             }
         }
 
-        System.out.println("\nGerando/carregando chave...");
+        System.out.println("\nGerando chave...");
         SecretKey chave = km.generateKey();
         km.salvarKey(chave);
 
         System.out.println("Criptografando arquivo...");
         fe.criptografarArquivo(chave, arquivo);
         System.out.println("Arquivo criptografado com sucesso!");
-        System.out.println("Chave salva em: C:\\Key-Encrypter\\chave_secreta.key");
     }
 
     private void descriptografar() throws Exception {
