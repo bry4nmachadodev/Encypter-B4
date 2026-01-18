@@ -2,6 +2,7 @@ package encrypter;
 
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -27,6 +28,12 @@ public class KeyManager {
         Files.write(path, keyBytes);
 
         System.out.println("Chave salva em: " + path.toAbsolutePath());
+    }
+
+    //ler arquivo -> que está com a chave
+    public SecretKey carregarKey() throws IOException {
+        Path path = Paths.get("C:\\Key-Encrypter\\chave_secreta.key");
+        return new SecretKeySpec(Files.readAllBytes(path), "AES");
     }
 
 }
