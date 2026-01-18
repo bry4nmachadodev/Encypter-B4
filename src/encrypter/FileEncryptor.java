@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class FileEncryptor {
-    private KeyManager keyManager;
 
     //Criptografar arquivo -> chave AES
     public void criptografarArquivo(SecretKey chave, Path arquivoOrigem) throws Exception {
