@@ -4,7 +4,6 @@ import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 
 public class FileEncryptor {
 
@@ -15,9 +14,8 @@ public class FileEncryptor {
         cipher.init(Cipher.ENCRYPT_MODE, chave);
         byte[] dadosCriptografado = cipher.doFinal(dados);
 
-        // Cria arquivo com extensão .encrypted
-        Path arquivoCriptografado = Paths.get(arquivoOrigem.toString() + ".encrypted");
-        Files.write(arquivoCriptografado, dadosCriptografado);
+        // Sobrescreve o arquivo original
+        Files.write(arquivoOrigem, dadosCriptografado);
     }
 
     //Descriptografar arquivo -> chave AES
@@ -27,10 +25,8 @@ public class FileEncryptor {
         cipher.init(Cipher.DECRYPT_MODE, chave);
         byte[] dadosDescriptografado = cipher.doFinal(dados);
 
-        // Remove o .encrypted do nome
-        String caminhoOriginal = arquivoOrigem.toString().replace(".encrypted", "");
-        Path arquivoDescriptografado = Paths.get(caminhoOriginal + ".decrypted");
-        Files.write(arquivoDescriptografado, dadosDescriptografado);
+        // Sobrescreve o arquivo original
+        Files.write(arquivoOrigem, dadosDescriptografado);
     }
 
 }
