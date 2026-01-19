@@ -37,7 +37,7 @@ public class EncriptadorGUI extends JFrame {
         JPanel painelPrincipal = new JPanel();
         painelPrincipal.setLayout(new BorderLayout(10, 10));
         painelPrincipal.setBorder(new EmptyBorder(20, 20, 20, 20));
-        painelPrincipal.setBackground(new Color(240, 240, 245));
+        painelPrincipal.setBackground(new Color(30, 30, 30));
 
         // Painel do topo com título
         JPanel painelTitulo = criarPainelTitulo();
@@ -56,11 +56,11 @@ public class EncriptadorGUI extends JFrame {
 
     private JPanel criarPainelTitulo() {
         JPanel painel = new JPanel();
-        painel.setBackground(new Color(240, 240, 245));
+        painel.setBackground(new Color(30, 30, 30));
 
         JLabel titulo = new JLabel("ENCRIPTADOR AES-256");
-        titulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        titulo.setForeground(new Color(50, 50, 50));
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 26));
+        titulo.setForeground(new Color(255, 255, 255));
         painel.add(titulo);
 
         return painel;
@@ -69,14 +69,14 @@ public class EncriptadorGUI extends JFrame {
     private JPanel criarPainelCentral() {
         JPanel painel = new JPanel();
         painel.setLayout(new BoxLayout(painel, BoxLayout.Y_AXIS));
-        painel.setBackground(new Color(240, 240, 245));
+        painel.setBackground(new Color(30, 30, 30));
         painel.setBorder(new EmptyBorder(10, 0, 10, 0));
 
         // Seção de seleção de operação
         JPanel painelOperacao = new JPanel();
-        painelOperacao.setBackground(Color.WHITE);
+        painelOperacao.setBackground(new Color(45, 45, 45));
         painelOperacao.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(220, 220, 220), 1),
+                BorderFactory.createLineBorder(new Color(60, 60, 60), 1),
                 new EmptyBorder(15, 20, 15, 20)
         ));
         painelOperacao.setLayout(new FlowLayout(FlowLayout.LEFT, 20, 5));
@@ -84,16 +84,19 @@ public class EncriptadorGUI extends JFrame {
 
         JLabel operacaoLabel = new JLabel("Selecione a operação:");
         operacaoLabel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        operacaoLabel.setForeground(new Color(230, 230, 230));
         painelOperacao.add(operacaoLabel);
 
         criptografarRadio = new JRadioButton("Criptografar");
         criptografarRadio.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        criptografarRadio.setBackground(Color.WHITE);
+        criptografarRadio.setBackground(new Color(45, 45, 45));
+        criptografarRadio.setForeground(new Color(200, 200, 200));
         criptografarRadio.setSelected(true);
 
         descriptografarRadio = new JRadioButton("Descriptografar");
         descriptografarRadio.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        descriptografarRadio.setBackground(Color.WHITE);
+        descriptografarRadio.setBackground(new Color(45, 45, 45));
+        descriptografarRadio.setForeground(new Color(200, 200, 200));
 
         ButtonGroup grupo = new ButtonGroup();
         grupo.add(criptografarRadio);
@@ -107,9 +110,9 @@ public class EncriptadorGUI extends JFrame {
 
         // Seção de seleção de arquivo
         JPanel painelArquivo = new JPanel();
-        painelArquivo.setBackground(Color.WHITE);
+        painelArquivo.setBackground(new Color(45, 45, 45));
         painelArquivo.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(220, 220, 220), 1),
+                BorderFactory.createLineBorder(new Color(60, 60, 60), 1),
                 new EmptyBorder(15, 20, 15, 20)
         ));
         painelArquivo.setLayout(new BorderLayout(10, 10));
@@ -117,23 +120,27 @@ public class EncriptadorGUI extends JFrame {
 
         JLabel arquivoTitulo = new JLabel("Arquivo:");
         arquivoTitulo.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        arquivoTitulo.setForeground(new Color(230, 230, 230));
 
         arquivoLabel = new JLabel("Nenhum arquivo selecionado");
         arquivoLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-        arquivoLabel.setForeground(new Color(100, 100, 100));
+        arquivoLabel.setForeground(new Color(150, 150, 150));
 
         importarBtn = new JButton("Importar Arquivo");
-        importarBtn.setFont(new Font("Segoe UI", Font.PLAIN, 13));
-        importarBtn.setBackground(new Color(70, 130, 180));
+        importarBtn.setFont(new Font("Segoe UI", Font.BOLD, 13));
+        importarBtn.setBackground(new Color(30, 30, 30));
         importarBtn.setForeground(Color.WHITE);
         importarBtn.setFocusPainted(false);
+        importarBtn.setBorderPainted(false);
+        importarBtn.setContentAreaFilled(true);
+        importarBtn.setOpaque(true);
         importarBtn.setBorder(new EmptyBorder(10, 20, 10, 20));
         importarBtn.setCursor(new Cursor(Cursor.HAND_CURSOR));
         importarBtn.addActionListener(e -> importarArquivo());
 
         JPanel painelArquivoInfo = new JPanel();
         painelArquivoInfo.setLayout(new BorderLayout(5, 5));
-        painelArquivoInfo.setBackground(Color.WHITE);
+        painelArquivoInfo.setBackground(new Color(45, 45, 45));
         painelArquivoInfo.add(arquivoTitulo, BorderLayout.NORTH);
         painelArquivoInfo.add(arquivoLabel, BorderLayout.CENTER);
 
@@ -163,20 +170,21 @@ public class EncriptadorGUI extends JFrame {
     private JPanel criarPainelLog() {
         JPanel painel = new JPanel();
         painel.setLayout(new BorderLayout(5, 5));
-        painel.setBackground(new Color(240, 240, 245));
+        painel.setBackground(new Color(30, 30, 30));
 
         JLabel logLabel = new JLabel("Log:");
         logLabel.setFont(new Font("Segoe UI", Font.BOLD, 12));
-        logLabel.setForeground(new Color(80, 80, 80));
+        logLabel.setForeground(new Color(200, 200, 200));
 
         logArea = new JTextArea(6, 40);
         logArea.setFont(new Font("Consolas", Font.PLAIN, 11));
         logArea.setEditable(false);
-        logArea.setBackground(new Color(250, 250, 250));
+        logArea.setBackground(new Color(40, 40, 40));
+        logArea.setForeground(new Color(220, 220, 220));
         logArea.setBorder(new EmptyBorder(8, 8, 8, 8));
 
         JScrollPane scrollPane = new JScrollPane(logArea);
-        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(220, 220, 220), 1));
+        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(60, 60, 60), 1));
 
         painel.add(logLabel, BorderLayout.NORTH);
         painel.add(scrollPane, BorderLayout.CENTER);
@@ -193,7 +201,7 @@ public class EncriptadorGUI extends JFrame {
         if (resultado == JFileChooser.APPROVE_OPTION) {
             arquivoSelecionado = fileChooser.getSelectedFile();
             arquivoLabel.setText(arquivoSelecionado.getName());
-            arquivoLabel.setForeground(new Color(50, 50, 50));
+            arquivoLabel.setForeground(new Color(255, 255, 255));
             executarBtn.setEnabled(true);
             adicionarLog("Arquivo selecionado: " + arquivoSelecionado.getAbsolutePath());
         }
