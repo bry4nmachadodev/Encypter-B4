@@ -222,12 +222,12 @@ public class EncriptadorGUI extends JFrame {
                         publish("Criptografando arquivo...");
                         fe.criptografarArquivo(chave, arquivoSelecionado.toPath());
                         publish("Arquivo criptografado com sucesso!");
-                        publish("Salvo como: " + arquivoSelecionado.getName() + ".encrypted");
+                        publish("O arquivo foi sobrescrito.");
                     } else {
                         publish("Descriptografando arquivo...");
                         fe.descriptografarArquivo(chave, arquivoSelecionado.toPath());
                         publish("Arquivo descriptografado com sucesso!");
-                        publish("Salvo como: " + arquivoSelecionado.getName().replace(".encrypted", "") + ".decrypted");
+                        publish("O arquivo foi sobrescrito.");
                     }
                 } catch (Exception e) {
                     publish("ERRO: " + e.getMessage());
